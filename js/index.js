@@ -65,7 +65,7 @@ function main() {
                 pared(i - 1,0,j - 1);
           }
       }*/
-      //construccion(0,0,30,30,"up");//inicio la funcio :)
+      construccion(0,0,30,30,"up");//inicio la funcio :)
       /*metodo recursivo que buscara y creara el laberinto
        @param: posX,posY se encargan de la posicion actual del metodo
        y @param ancho, alto: se encargan de la posicion final del metodo recursivo*/
@@ -110,7 +110,7 @@ function main() {
                   tablaJuego[posX][posY] = 3;
                   suelo(posX *3,p,posY*3);
                   construccion(posX *3, posY *3 -3, ancho, largo,"left");
-              }
+              }else return;
             }else if(direc == "down"){
               if(direccion < 0.3 && nx && tablaJuego[posX - 1][posY] != 3){
 
@@ -135,7 +135,7 @@ function main() {
                   tablaJuego[posX][posY] = 3;
                   suelo(posX *3,p,posY*3);
                   construccion(posX *3, posY *3 -3, ancho, largo,"left");
-              }
+              }else return;
             }else if(direc == "left"){
               if(direccion < 0.3 && px && tablaJuego[posX + 1][posY] != 3){
 
@@ -160,7 +160,7 @@ function main() {
                   tablaJuego[posX][posY] = 3;
                   suelo(posX *3,p,posY*3);
                   construccion(posX *3, posY *3 -3, ancho, largo,"rigth");
-              }
+              }else return;
             }else if(direc == "rigth"){
               if(direccion < 0.3 && px && tablaJuego[posX + 1][posY] != 3){
 
@@ -185,7 +185,7 @@ function main() {
                   tablaJuego[posX][posY] = 3;
                   suelo(posX *3,p,posY*3);
                   construccion(posX *3, posY *3 +3, ancho, largo,"rigth");
-              }
+              }else return;
             }
           }while(caminoEncontrado == false)
         }
