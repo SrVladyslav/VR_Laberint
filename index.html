@@ -6,18 +6,23 @@
             <head>
                 <script src="https://aframe.io/releases/0.5.0/aframe.min.js">
                 </script>
-                    <script src="js/index.js">
+                <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.min.js"></script>
+                <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.1.1/dist/aframe-physics-system.min.js"></script>
+                <script src="js/index.js">
                 </script>
             </head>
             <body>
-                <a-scene id="scene" f>
-                   
-                    <a-plane color="#666666" height="400" position="0 0 -4" repeat="80 80" rotation="-90 0 0" src="assets/grass.png" width="400">
+                <a-scene id="scene" physics>
+                    <a-entity id="user" camera="userHeight: 1.6"
+                        kinematic-body universal-controls>
+                    </a-entity>
+                    <a-plane color="#666666" height="400" position="0 0 -4" repeat="80 80" rotation="-90 0 0" src="assets/grass.png" width="400" static-body>
                     </a-plane>
                     <a-sky color="#0099FF" src="assets/sky.jpg">
                     </a-sky>
                     <assets>
-                        <img id="ladrillos" src="assets/piedra.jpg">
+                        <img id="ladrillos" src="assets/piedra5.jpg">
+                        <img id="floor" src="assets/suelo.jpg">
                     </assets>
                     
                     <script type="text/javascript">
