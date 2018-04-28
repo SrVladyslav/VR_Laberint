@@ -93,7 +93,7 @@ function main() {
                   caminoEncontrado = true;
                   tablaJuego[posX][posY] = 3;
                   suelo(posX *3,p,posY*3);
-                  construccion(posX*3 + 3, posY *3, ancho, largo);
+                  construccion(posX*3 + 3, posY *3, ancho, largo,"up");
               }
               if(direccion < 0.6 && py && tablaJuego[posX][posY +1] != 3){
 
@@ -101,7 +101,7 @@ function main() {
                   caminoEncontrado = true;
                   tablaJuego[posX][posY] = 3;
                   suelo(posX *3,p,posY*3);
-                  construccion(posX *3 , posY *3 +3, ancho, largo);
+                  construccion(posX *3 , posY *3 +3, ancho, largo,"rigth");
               }
               if(direccion <= 1 && ny && tablaJuego[posX][posY -1] != 3){
 
@@ -109,9 +109,8 @@ function main() {
                   caminoEncontrado = true;
                   tablaJuego[posX][posY] = 3;
                   suelo(posX *3,p,posY*3);
-                  construccion(posX *3, posY *3 -3, ancho, largo);
+                  construccion(posX *3, posY *3 -3, ancho, largo,"left");
               }
-
             }else if(direc == "down"){
               if(direccion < 0.3 && nx && tablaJuego[posX - 1][posY] != 3){
 
@@ -119,7 +118,7 @@ function main() {
                   caminoEncontrado = true;
                   tablaJuego[posX][posY] = 3;
                   suelo(posX *3,p,posY*3);
-                  construccion(posX*3 - 3, posY *3, ancho, largo);
+                  construccion(posX*3 - 3, posY *3, ancho, largo,"down");
               }
               if(direccion < 0.6 && py && tablaJuego[posX][posY +1] != 3){
 
@@ -127,7 +126,7 @@ function main() {
                   caminoEncontrado = true;
                   tablaJuego[posX][posY] = 3;
                   suelo(posX *3,p,posY*3);
-                  construccion(posX *3 , posY *3 +3, ancho, largo);
+                  construccion(posX *3 , posY *3 +3, ancho, largo, "rigth");
               }
               if(direccion <= 1 && ny && tablaJuego[posX][posY -1] != 3){
 
@@ -135,9 +134,8 @@ function main() {
                   caminoEncontrado = true;
                   tablaJuego[posX][posY] = 3;
                   suelo(posX *3,p,posY*3);
-                  construccion(posX *3, posY *3 -3, ancho, largo);
+                  construccion(posX *3, posY *3 -3, ancho, largo,"left");
               }
-
             }else if(direc == "left"){
               if(direccion < 0.3 && px && tablaJuego[posX + 1][posY] != 3){
 
@@ -145,7 +143,7 @@ function main() {
                   caminoEncontrado = true;
                   tablaJuego[posX][posY] = 3;
                   suelo(posX *3,p,posY*3);
-                  construccion(posX*3 + 3, posY *3, ancho, largo);
+                  construccion(posX*3 + 3, posY *3, ancho, largo,"up");
               }
               if(direccion < 0.6 && nx && tablaJuego[posX][posY -1] != 3){
 
@@ -153,7 +151,7 @@ function main() {
                   caminoEncontrado = true;
                   tablaJuego[posX][posY] = 3;
                   suelo(posX *3,p,posY*3);
-                  construccion(posX *3 , posY *3 -3, ancho, largo);
+                  construccion(posX *3 , posY *3 -3, ancho, largo,"left");
               }
               if(direccion <= 1 && py && tablaJuego[posX][posY -1] != 3){
 
@@ -161,9 +159,8 @@ function main() {
                   caminoEncontrado = true;
                   tablaJuego[posX][posY] = 3;
                   suelo(posX *3,p,posY*3);
-                  construccion(posX *3, posY *3 -3, ancho, largo);
+                  construccion(posX *3, posY *3 -3, ancho, largo,"rigth");
               }
-
             }else if(direc == "rigth"){
               if(direccion < 0.3 && px && tablaJuego[posX + 1][posY] != 3){
 
@@ -171,7 +168,7 @@ function main() {
                   caminoEncontrado = true;
                   tablaJuego[posX][posY] = 3;
                   suelo(posX *3,p,posY*3);
-                  construccion(posX*3 + 3, posY *3, ancho, largo);
+                  construccion(posX*3 + 3, posY *3, ancho, largo,"up");
               }
               if(direccion < 0.6 && nx && tablaJuego[posX][posY -1] != 3){
 
@@ -179,7 +176,7 @@ function main() {
                   caminoEncontrado = true;
                   tablaJuego[posX][posY] = 3;
                   suelo(posX *3,p,posY*3);
-                  construccion(posX *3 , posY *3 -3, ancho, largo);
+                  construccion(posX *3 , posY *3 -3, ancho, largo,"left");
               }
               if(direccion <= 1 && py && tablaJuego[posX][posY +1] != 3){
 
@@ -187,7 +184,7 @@ function main() {
                   caminoEncontrado = true;
                   tablaJuego[posX][posY] = 3;
                   suelo(posX *3,p,posY*3);
-                  construccion(posX *3, posY *3 +3, ancho, largo);
+                  construccion(posX *3, posY *3 +3, ancho, largo,"rigth");
               }
             }
           }while(caminoEncontrado == false)
