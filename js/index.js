@@ -156,8 +156,8 @@ function main() {
                     //caminoEncontrado = true;
                     tablaJuego[posX][posY] = 3;
                     tablaJuego[posX+1][posY] = 3;
-                    suelo(posX *3,p,posY *3);
-                    suelo((posX +1) *3 ,p,posY *3 );
+                    //suelo(posX *3,p,posY *3);
+                    //suelo((posX +1) *3 ,p,posY *3 );
                     construccion(posX + 2, posY, ancho, largo,"up");
                     sos = false;
                 }else if(direccion == 1 && py&&py1 && tablaJuego[posX][posY +1] != 3 && tablaJuego[posX][posY +2] !=3 && direc != "left"){
@@ -165,8 +165,8 @@ function main() {
                     //caminoEncontrado = true;
                     tablaJuego[posX][posY] = 3;
                     tablaJuego[posX][posY+1] = 3;
-                    suelo(posX *3,p,posY *3);
-                    suelo(posX *3 ,p,(posY +1) *3 );
+                    //suelo(posX *3,p,posY *3);
+                    //suelo(posX *3 ,p,(posY +1) *3 );
                     construccion(posX, posY +2, ancho, largo,"rigth");
                     sos = false;
                 }else if(direccion == 2 && ny &&ny1&& tablaJuego[posX][posY -1] != 3 && tablaJuego[posX][posY -2] !=3 && direc != "right"){
@@ -175,8 +175,8 @@ function main() {
                     //caminoEncontrado = true;
                     tablaJuego[posX][posY] = 3;
                     tablaJuego[posX][posY-1] = 3;
-                    suelo(posX*3,p,posY*3);
-                    suelo(posX *3 ,p,(posY -1) *3 );
+                    //suelo(posX*3,p,posY*3);
+                    //suelo(posX *3 ,p,(posY -1) *3 );
                     construccion(posX, (posY -2), ancho, largo,"left");
                     sos = false;
                 } else if(direccion == 3 && nx&& nx1 && tablaJuego[posX -1][posY] != 3 && tablaJuego[posX -2][posY] !=3 && direc != "up"){
@@ -184,8 +184,8 @@ function main() {
                     //caminoEncontrado = true;
                     tablaJuego[posX][posY] = 3;
                     tablaJuego[posX-1][posY] = 3;
-                    suelo(posX *3,p,posY *3);
-                    suelo((posX -1) *3 ,p,posY *3 );
+                    //suelo(posX *3,p,posY *3);
+                    //suelo((posX -1) *3 ,p,posY *3 );
                     construccion(posX - 2, posY, ancho, largo,"down");
                     sos = false;
                 } else {
