@@ -4,7 +4,7 @@ function main() {
   var mapa = document.querySelector('a-scene');
   var p = -0.4; //coordenada y del muro
   var direc = "";//ireccion a la que ira el camino
-  var lado = 7;
+  var lado = 43;
   /*
     Este metodo añade un cubo al mapa para construir el laberinto
     @param: x,y: coordenadas respectivas
