@@ -8,8 +8,8 @@
                 </script>
                 <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.min.js"></script>
                 <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.1.1/dist/aframe-physics-system.min.js"></script>
-                <script src="js/index.js">
-                </script>
+                <script src="./js/win-listener.js"></script>
+                
             </head>
             <body>
                 <a-scene id="scene" physics>
@@ -24,6 +24,7 @@
                         <img id="ladrillos" src="assets/piedra.jpg">
                         <img id="floor" src="assets/suelo.jpg">
                         <img id="techo" src="assets/suelo2.png">
+                        <text id="xD" src="laberinto.txt">
                     </assets>
                     
                     <script type="text/javascript">
@@ -52,6 +53,8 @@
                             document.querySelector('a-scene').appendChild(caja);
                         }
                         cubito(5,5);*/
+                    </script>
+                    <script src="js/index.js">
                     </script>
                 </a-scene>
             </body>

@@ -1,23 +1,27 @@
 window.onload = function () { main()}
 
-
-
 function main() {
   var mapa = document.querySelector('a-scene');
   var p = -0.4; //coordenada y del muro
   var direc = "";//ireccion a la que ira el camino
-  var lado = 30;
+  var lado = 7;
   /*
     Este metodo añade un cubo al mapa para construir el laberinto
     @param: x,y: coordenadas respectivas
   */
+
+  /**location.reload();*/
+
+  var user = document.getElementById('user');
+  user.setAttribute('win-listener', {x: (lado-3)*3, z: (lado-3)*3});
+  console.log((lado-2)*3);
 
   function pared(x,y,z){
     var muro = document.createElement('a-box');         //creo el cubo que sera nuestro muro
     muro.setAttribute('geometry', {
       depth: 3,
       width: 3,
-      height: 6
+      height: 8
     });
     muro.setAttribute('position', {x: x,y: y,z: z});    //declaramos la posicion
     muro.setAttribute('shadow','cast','true');          //declaramos la sombra
@@ -39,17 +43,17 @@ function main() {
       tierra.setAttribute('static-body','');
       mapa.appendChild(tierra);                             //añado mi muro al mapa
   }
-
-  function techo(x,y,z){
+  techo(3.5,lado);
+  function techo(y,lado){
       var tierra = document.createElement('a-box');         //creo el cubo que sera nuestro muro
       tierra.setAttribute('geometry', {
-        depth: 3,
-        width: 3,
-        height: 6
+        depth: 3*lado,
+        width: 3*lado,
+        height: 1
       });
-      tierra.setAttribute('position', {x: x,y: y,z: z});    //declaramos la posicion
+      tierra.setAttribute('position', {x: 3*lado/2-2,y: y,z: 3*lado/2-2});    //declaramos la posicion
       tierra.setAttribute('shadow','cast','true');          //declaramos la sombra
-      tierra.setAttribute('material',{src:"#techo"});
+      tierra.setAttribute('material',{src:"#techo", repeat: {x: lado, y: lado}});
       tierra.setAttribute('static-body','');
       mapa.appendChild(tierra);                             //añado mi muro al mapa
   }
@@ -59,208 +63,166 @@ function main() {
   /**metodo para dibujar el laberinto*/
   function laberinto(ancho, largo){
     //dibujo las paredes exteriores que limitaran el campo
-    for(var i = 0;i < ancho;i++){pared(-3,0,i *3 - 3); pared(largo *3 - 3,0,i*3 - 3);} 
-    for(var j = 0;j < largo;j++){pared(j *3-3,0,0 - 3); pared(j*3 - 3,0,ancho *3 - 3);} 
+    for(var i = 0;i < ancho;i++){pared(-3,0,i *3 - 3); pared((largo -1) *3 - 3,0,i*3 - 3);} 
+    for(var j = 0;j < largo;j++){pared(j *3-3,0,0 - 3); pared(j*3 - 3,0,(ancho-1) *3 - 3);} 
 
+/*    suelo(0*3,p,0*3);
+    suelo(lado *3 -6,p,lado*3 -6);
+    suelo(0,p,lado*3 -6);
+    suelo(lado*3,p,0);
+
+    var i = 1;
+    console.log("va");
+    suelo(i*3,p,i*3);i=2;
+    suelo(i*3,p,i*3);
+    suelo(3*3,p,4*3);
+*/
     dibujarMapa();
     function dibujarMapa(){
       //creo el array multidimensional del mapa
-      var tablaJuego = new Array(ancho);
+      var tablaJuego = new Array(ancho-2);
 
-      for(var i= 0; i < ancho; i++){//multiplicar por 3 para el metodo viejo
-        tablaJuego[i] = new Array(largo);
+      for(var i= 0; i < ancho -2; i++){//multiplicar por 3 para el metodo viejo
+        tablaJuego[i] = new Array(largo-2);
       }
       /*relleno el array con ceros para despues aplicar 
       el algoritmo del laberinto*/
-      for (var i = 0; i < ancho; i++) {
-        for(var j = 0; j < largo; j++){
+      for (var i = 0; i < ancho -2; i++) {
+        for(var j = 0; j < largo -2; j++){
           tablaJuego[i][j] = 0; 
         }
       }
+      /*
       for(var i = 0; i < ancho; i++){
           for(var j = 0; j < largo; j++){
-                techo(i*3 - 1,6,j*3 - 1);
+                techo(i*3 - 1,p,j*3 - 1);
           }
-      }
+      }*/
+      var lin;
+/*
+      fetch('laberinto.txt')
+      .then(res => res.text())
+      .then(content => {
+      var lines = content.split(/\n/);
+      lines.forEach(line => console.log(Array.from(lines)));
+      //lines.forEach(line => lin = Array.from(lines));
+      //lines.forEach(line => console.log(line));
+      });*/
 
-      for(var i = 0; i < ancho; i++){
-          for(var j = 0; j < largo; j++){
-                var r = Math.random();
-                if(r > 0.65)pared(i*3,0,j*3);
-          }
-      }
+      //console.log(lines);
+      //console.log(" + " + lin[1]);
 
-      //construccion(0,0,lado,lado,"up");//inicio la funcio :)
+
+
+
+      var caminoEncontrado = false;
+      construccion(0,0,lado,lado,"up");//inicio la funcio :)
+      rellenar();
       /*metodo recursivo que buscara y creara el laberinto
        @param: posX,posY se encargan de la posicion actual del metodo
        y @param ancho, alto: se encargan de la posicion final del metodo recursivo*/
-      /*function construccion(posX, posY, ancho, largo, direc){
+      function construccion(posX, posY, ancho, largo, direc){
         //console.log("hola principio");
-        var desplazamiento = Math.random() * (5-1)+1;//elijo un desplazamiento entre 1 y 5 bloques
+        var desplazamiento = parseInt(Math.random()*3);//elijo un desplazamiento entre 1 y 5 bloques
         //console.log(desplazamiento + " esta aqui" + posX + " " + posY);
-        //if(posX >=lado || posY >= lado){return;}
+        if(posX== lado-2 && posY== lado-2){return;}
         //caso en que se disputara a boleo a donde ira
-        //else{ 
-          var direccion = Math.random();//saco la variable a boleo
+        else{ 
+          var direccion = parseInt(Math.random()*3);//saco la variable a boleo
           //console.log("direccion " + direccion);
-          var px = (posX+1 <= ancho);//X positiva
+          var px = (posX+1 <= lado -2);//X positiva
           var nx = (posX-1 >= 0);//X negativa
-          var py = (posY+1 <= largo);//Y positiva 
+          var py = (posY+1 <= lado -2);//Y positiva 
           var ny = (posY-1 >= 0);
+          var px1 = (posX+2 <= lado -2);//X positiva
+          var nx1 = (posX-2 >= 0);//X negativa
+          var py1 = (posY+2 <= lado -2);//Y positiva 
+          var ny1 = (posY-2 >= 0);
+
           console.log( direccion);
           //direccion
-          var caminoEncontrado = false;
+
+          var sos = true;
+          
           do{
-            if(direc == "up"){
-              if(direccion <= 0.3 && px && tablaJuego[posX + 1][posY] != 3){
+            if(posX== lado-2 && posY== lado-2){suelo(posX *3,p,posY *3);return;}
 
-                  console.log("entra PX" + direccion);
-                  caminoEncontrado = true;
-                  tablaJuego[posX][posY] = 3;
-                  suelo(posX *3,p,posY *3);
-                  construccion(posX + 1, posY, ancho, largo,"up");
-              }else if(direccion <= 0.6 && py && tablaJuego[posX][posY +1] != 3){
+            else {
+              var possibilities = shuffle([0,1,2,3]);
+              while(possibilities.length > 0) {
+                direccion = possibilities.pop();
+                if(direccion == 0 && px&& px1 && tablaJuego[posX + 1][posY] != 3 && tablaJuego[posX +2][posY] !=3 && direc != "down"){
+                    console.log("entra PX" + direccion);
+                    //caminoEncontrado = true;
+                    tablaJuego[posX][posY] = 3;
+                    tablaJuego[posX+1][posY] = 3;
+                    suelo(posX *3,p,posY *3);
+                    suelo((posX +1) *3 ,p,posY *3 );
+                    construccion(posX + 2, posY, ancho, largo,"up");
+                    sos = false;
+                }else if(direccion == 1 && py&&py1 && tablaJuego[posX][posY +1] != 3 && tablaJuego[posX][posY +2] !=3 && direc != "left"){
+                    console.log("entra PY" + direccion);
+                    //caminoEncontrado = true;
+                    tablaJuego[posX][posY] = 3;
+                    tablaJuego[posX][posY+1] = 3;
+                    suelo(posX *3,p,posY *3);
+                    suelo(posX *3 ,p,(posY +1) *3 );
+                    construccion(posX, posY +2, ancho, largo,"rigth");
+                    sos = false;
+                }else if(direccion == 2 && ny &&ny1&& tablaJuego[posX][posY -1] != 3 && tablaJuego[posX][posY -2] !=3 && direc != "right"){
 
-                  console.log("entra PY" + direccion);
-                  caminoEncontrado = true;
-                  tablaJuego[posX][posY] = 3;
-                  suelo(posX *3,p,posY *3);
-                  construccion(posX, posY +1, ancho, largo,"rigth");
-              }else if(direccion <= 1 && ny && tablaJuego[posX][posY -1] != 3){
-
-                  console.log("entra NY" + direccion);
-                  caminoEncontrado = true;
-                  tablaJuego[posX][posY] = 3;
-                  suelo(posX*3,p,posY*3);
-                  construccion(posX, -(posY -1), ancho, largo,"left");
-              }else if(direccion <= 1 && nx && tablaJuego[posX-1][posY] != 3){
-
-                  console.log("entra NX" + direccion);
-                  caminoEncontrado = true;
-                  tablaJuego[posX][posY] = 3;
-                  suelo(posX*3,p,posY*3);
-                  construccion(-(posX-1), posY, ancho, largo,"left");
-              }else console.log("sale en" + direccion);return;
-            }else if(direc == "down"){
-              if(direccion <= 0.3 && nx && tablaJuego[posX - 1][posY] != 3){
-
-                  //console.log("hola" + direccion);
-                  caminoEncontrado = true;
-                  tablaJuego[posX][posY] = 3;
-                  suelo(posX *3,p,posY *3);
-                  construccion(-(posX- 1), posY, ancho, largo,"down");
-              }else if(direccion <= 0.6 && py && tablaJuego[posX][posY +1] != 3){
-
-                 //console.log("hola" + direccion);
-                  caminoEncontrado = true;
-                  tablaJuego[posX][posY] = 3;
-                  suelo(posX *3,p,posY *3);
-                  construccion(posX, posY +1, ancho, largo, "rigth");
-              }else if(direccion <= 1 && ny && tablaJuego[posX][posY -1] != 3){
-
-                  //console.log("hola" + direccion);
-                  caminoEncontrado = true;
-                  tablaJuego[posX][posY] = 3;
-                  suelo(posX *3,p,posY *3);
-                  construccion(posX, -(posY-1), ancho, largo,"left");
-              }else return;
-            }else if(direc == "left"){
-              if(direccion <= 0.3 && px && tablaJuego[posX + 1][posY] != 3){
-
-                  //console.log("hola" + direccion);
-                  caminoEncontrado = true;
-                  tablaJuego[posX][posY] = 3;
-                  suelo(posX *3,p,posY*3);
-                  construccion(posX + 1, posY, ancho, largo,"up");
-              }else if(direccion <= 0.6 && nx && tablaJuego[posX -1][posY] != 3){
-
-                  //console.log("hola" + direccion);
-                  caminoEncontrado = true;
-                  tablaJuego[posX][posY] = 3;
-                  suelo(posX *3,p,posY *3);
-                  construccion(-(posX), posY -1, ancho, largo,"left");
-              }else if(direccion <= 1 && py && tablaJuego[posX][posY +1] != 3){
-
-                 /// console.log("hola" + direccion);
-                  caminoEncontrado = true;
-                  tablaJuego[posX][posY] = 3;
-                  suelo(posX *3,p,posY *3);
-                  construccion(posX, -(posY -1), ancho, largo,"rigth");
-              }else return;
-            }else if(direc == "rigth"){
-              if(direccion <= 0.3 && px && tablaJuego[posX + 1][posY] != 3){
-
-                  //console.log("hola" + direccion);
-                  caminoEncontrado = true;
-                  tablaJuego[posX][posY] = 3;
-                  suelo(posX *3,p,posY *3);
-                  construccion(posX + 1, posY, ancho, largo,"up");
-              }else if(direccion <= 0.6 && nx && tablaJuego[posX][posY -1] != 3){
-
-                  //console.log("hola" + direccion);
-                  caminoEncontrado = true;
-                  tablaJuego[posX][posY] = 3;
-                  suelo(posX *3,p,posY *3);
-                  construccion(posX, -(posY-1), ancho, largo,"left");
-              }else if(direccion <= 1 && py && tablaJuego[posX][posY +1] != 3){
-
-                  //console.log("hola" + direccion);
-                  caminoEncontrado = true;
-                  tablaJuego[posX][posY] = 3;
-                  suelo(posX *3,p,posY *3);
-                  construccion(posX, posY +1, ancho, largo,"rigth");
-              }else return;
+                    console.log("entra NY" + direccion);
+                    //caminoEncontrado = true;
+                    tablaJuego[posX][posY] = 3;
+                    tablaJuego[posX][posY-1] = 3;
+                    suelo(posX*3,p,posY*3);
+                    suelo(posX *3 ,p,(posY -1) *3 );
+                    construccion(posX, (posY -2), ancho, largo,"left");
+                    sos = false;
+                } else if(direccion == 3 && nx&& nx1 && tablaJuego[posX -1][posY] != 3 && tablaJuego[posX -2][posY] !=3 && direc != "up"){
+                    console.log("entra PX" + direccion);
+                    //caminoEncontrado = true;
+                    tablaJuego[posX][posY] = 3;
+                    tablaJuego[posX-1][posY] = 3;
+                    suelo(posX *3,p,posY *3);
+                    suelo((posX -1) *3 ,p,posY *3 );
+                    construccion(posX - 2, posY, ancho, largo,"down");
+                    sos = false;
+                } else {
+                  console.log('SOS');
+                }
+              }
             }
-          }while(caminoEncontrado == false)
-        //}
-      }*/
-      var salir = false;
+          }while(caminoEncontrado == true)
+        }
+      }
+      rellenar();
+      function rellenar (){
+        console.log("pintando");
+        for(var i = 0; i < ancho-2; i++){
+          for(var j = 0; j < largo-2; j++){
+                console.log(tablaJuego[i][j]);
+                if(tablaJuego[i][j] != 3 )pared(i*3,p,j*3);
+          }
+        }
+      }
+      function shuffle(array) {
+        var currentIndex = array.length, temporaryValue, randomIndex;
 
-      var repeticiones = 0;
-      //construccion(0,0);
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
 
-      function construccion(posX , posY){
-          var direccion = Math.random();
-          var desplazamiento = Math.random() * (5-1)-1;
-          do{
-            console.log("Intento: " + repeticiones);
-            if(posX == lado - 2 && posY == lado-2){return;}//caso base
-            //caso general
-            if(direccion <= 0.25 && (posX + 1) <= (lado -2)){//arriba
+          // Pick a remaining element...
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
 
-                for(var i = 0;i <= desplazamiento; i++ ){ if((posX + i) < (lado -2) && tablaJuego[posX +i][posY] != 3){
-                  tablaJuego[posX +i][posY] =3;suelo(posX * 3,p, posY *3);console.log("arriba");}}
+          // And swap it with the current element.
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
+        }
 
-                  construccion(posX +i, posY);
-
-            }else if(direccion <= 0.5 && (posX -1) >= 0){//abajo
-
-                for(var i = 0;i <= desplazamiento; i++ ){ if((posX - i) > 0 && tablaJuego[posX -i][posY] != 3){ 
-                  tablaJuego[posX -i][posY] =3;suelo(posX * 3,p, posY *3);console.log("abajo");}}
-
-                  construccion(posX - i, posY +i);
-
-            }else if(direccion <= 0.75 && (posY -1) >= (lado -2)){//izquierda
-
-                for(var i = 0;i <= desplazamiento; i++ ){ if((posY + i) < (lado -2) && tablaJuego[posX][posY + i] != 3){
-                 
-                  tablaJuego[posX][posY + i] =3;suelo(posX * 3,p, posY *3);console.log("izquierda");}}
-
-                  construccion(posX, posY +i);
-
-            }else if(direccion <=1 && (posY -1) >= 0){//derecha
-
-                for(var i = 0;i <= desplazamiento; i++ ){ if((posY - i) > 0 && tablaJuego[posX][posY - i] != 3){ 
-                 
-                  tablaJuego[posX][posY - i] =3;suelo(posX * 3,p, posY *3);console.log("derecha");}}
-
-                  construccion(posX, posY -i);
-
-            }else if(repeticiones > 6){salir = true;}
-            
-            repeticiones ++;
-          } while(salir == true)
-        console.log("esta aqui");
+        return array;
       }
     }
   }

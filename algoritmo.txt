@@ -1,0 +1,78 @@
+/*
+      var salir = false;
+
+      console.log(parseInt(Math.random()*3));
+
+      var repeticiones = 0;
+      //construccion(0,0);
+
+      function construccion(posX , posY){
+          var desplazamiento = parseInt(Math.random() * 5);
+          while(salir == false){
+              var direccion = parseInt(Math.random() * (4-1)-1);
+              console.log("Intento: " + repeticiones + "............................direccion: " + direccion);
+
+              if(posX == lado-2 && posY == lado-2){ console.log("sale aqui");return;}//caso base
+              //caso general
+              else if(direccion = 1 && (posX + 1) < (lado-2)){//arriba
+                  repeticiones = 0;suelo(posX * 3,p, posY *3);
+                  for(var i = 1;i <= desplazamiento && (posX + i) < (lado-2); i++ ){ 
+                    if(tablaJuego[posX +i][posY] != 3){
+
+                      tablaJuego[posX +i][posY] =3;
+                      suelo(posX * 3,p, posY *3);console.log("arriba");
+                      posX = posX +i;
+                    }
+                  }
+                  console.log("posX: " + posX + "  posY: " + posY + " lado: "+ lado +" direccion: " + direccion +
+                    +"  desplazamiento: " + desplazamiento);
+                  construccion(posX, posY);
+
+              }else if(direccion = 2 && posX -1 >= 0){//abajo
+                  repeticiones = 0;suelo(posX * 3,p, posY *3);
+                  for(var i = 1;i <= desplazamiento && (posX - i) >= 0; i++ ){ 
+                    if(tablaJuego[posX -i][posY] != 3){ 
+
+                      tablaJuego[posX -i][posY] =3;
+                      suelo(posX * 3,p, posY *3);console.log("abajo");
+                      posX = posX -i;
+                    }
+                  }
+                  console.log("posX: " + posX + "  posY: " + posY + " lado: "+ lado +" direccion: " + direccion +
+                    +"  desplazamiento: " + desplazamiento);
+                  construccion(posX, posY);
+
+              }else if(direccion = 3 && (posY +1) < (lado -3)){//izquierda
+                  repeticiones = 0;suelo(posX * 3,p, posY *3);
+                  for(var i = 1;i <= desplazamiento && (posY + i) < (lado-3); i++ ){ 
+
+                    if(tablaJuego[posX][posY + i] != 3){
+                      tablaJuego[posX][posY + i] =3;
+                      suelo(posX * 3,p, posY *3);console.log("izquierda");
+                      posY = posY +i;
+                    }
+                  }
+                  console.log("posX: " + posX + "  posY: " + posY + " lado: "+ lado +" direccion: " + direccion +
+                    +"  desplazamiento: " + desplazamiento);
+                  construccion(posX, posY);
+
+              }else if(direccion =0 && (posY -1) >= 0){//derecha
+                    repeticiones = 0;suelo(posX * 3,p, posY *3);
+                    for(var i = 1;i <= desplazamiento &&(posY - i) >= 0 ; i++ ){ 
+                      if(tablaJuego[posX][posY - i] != 3){ 
+
+                      posY = posY -i;
+                      tablaJuego[posX][posY] =3;suelo(posX * 3,p, posY *3);console.log("derecha");
+                    }
+                  }
+
+                  console.log("posX: " + posX + "  posY: " + posY + " lado: "+ lado +" direccion: " + direccion +
+                                    +"  desplazamiento: " + desplazamiento);
+                  construccion(posX, posY -i);
+
+              }if(repeticiones > 9){salir = true;}
+              
+              repeticiones ++;
+          }
+        console.log("esta aqui");
+      }*/
