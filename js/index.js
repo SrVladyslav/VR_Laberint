@@ -23,17 +23,20 @@ function main() {
   // Blink engine detection
   var isBlink = (isChrome || isOpera) && !!window.CSS;
   if(isBlink){alert("Estas usando Blink !!");}
+
+
+
   //juego
   var mapa = document.querySelector('a-scene');
   var p = -1.05; //coordenada y del muro
   var direc = "";//ireccion a la que ira el camino
   var lado = 1;
-  do{
-     var nombre = prompt("Con que area del Laberinto quiere jugar usted?(para telefonos es recomendable una menor de 21):  ");
-      if(nombre %2 ==0 && nombre > 6){alert("Introduzca una area impar por favor, gracias!!")}
-      else if(nombre < 7){ alert("Por favor, algo mas de competitividad, intenta un laberinto mas grande !!:")}
-      if(nombre > 71){alert("Por amor a vuestro dispositivo y la fluidez del juego, os restringimos la posibilidad de crear un laberinto tangrande. Por favor, inente con uno mas pequeño!!");}
-  }while(nombre % 2 == 0 || nombre < 6 || nombre > 71)
+    do{
+       var nombre = prompt("Con que area del Laberinto quiere jugar usted?(para telefonos es recomendable una menor de 21):  ");
+        if(nombre %2 ==0 && nombre > 6){alert("Introduzca una area impar por favor, gracias!!")}
+        else if(nombre < 7){ alert("Por favor, algo mas de competitividad, intenta un laberinto mas grande !!:")}
+        if(nombre > 71){alert("Por amor a vuestro dispositivo y la fluidez del juego, os restringimos la posibilidad de crear un laberinto tangrande. Por favor, inente con uno mas pequeño!!");}
+    }while(nombre % 2 == 0 || nombre < 6 || nombre > 71)
   alert("Usted eligio " + nombre+ ". Que la suerte os acompañe!!!");
   lado = nombre;
   //if(!isFirefox){lado = 7;} //en caso que no sea firefox
@@ -74,7 +77,8 @@ function main() {
       tierra.setAttribute('static-body','');
       mapa.appendChild(tierra);                             //añado mi muro al mapa
   }
-  techo(3.5,lado);
+
+  techo(3.5,lado);//llamo a la funcion
   function techo(y,lado){
       var tierra = document.createElement('a-box');         //creo el cubo que sera nuestro muro
       tierra.setAttribute('geometry', {
@@ -89,25 +93,14 @@ function main() {
       mapa.appendChild(tierra);                             //añado mi muro al mapa
   }
 
-  laberinto(lado,lado); 
 
+  laberinto(lado,lado); 
   /**metodo para dibujar el laberinto*/
   function laberinto(ancho, largo){
     //dibujo las paredes exteriores que limitaran el campo
     for(var i = 0;i < ancho;i++){pared(-3,0,i *3 - 3); pared((largo -1) *3 - 3,0,i*3 - 3);} 
     for(var j = 0;j < largo;j++){pared(j *3-3,0,0 - 3); pared(j*3 - 3,0,(ancho-1) *3 - 3);} 
 
-/*    suelo(0*3,p,0*3);
-    suelo(lado *3 -6,p,lado*3 -6);
-    suelo(0,p,lado*3 -6);
-    suelo(lado*3,p,0);
-
-    var i = 1;
-    console.log("va");
-    suelo(i*3,p,i*3);i=2;
-    suelo(i*3,p,i*3);
-    suelo(3*3,p,4*3);
-*/
     dibujarMapa();
     function dibujarMapa(){
       //creo el array multidimensional del mapa
@@ -166,39 +159,27 @@ function main() {
                 direccion = possibilities.pop();
                 if(direccion == 0 && px&& px1 && tablaJuego[posX + 1][posY] != 3 && tablaJuego[posX +2][posY] !=3 && direc != "down"){
                     //console.log("entra PX" + direccion);
-                    //caminoEncontrado = true;
                     tablaJuego[posX][posY] = 3;
                     tablaJuego[posX+1][posY] = 3;
-                    //suelo(posX *3,p,posY *3);
-                    //suelo((posX +1) *3 ,p,posY *3 );
                     construccion(posX + 2, posY, ancho, largo,"up");
                     sos = false;
                 }else if(direccion == 1 && py&&py1 && tablaJuego[posX][posY +1] != 3 && tablaJuego[posX][posY +2] !=3 && direc != "left"){
                     //console.log("entra PY" + direccion);
-                    //caminoEncontrado = true;
                     tablaJuego[posX][posY] = 3;
                     tablaJuego[posX][posY+1] = 3;
-                    //suelo(posX *3,p,posY *3);
-                    //suelo(posX *3 ,p,(posY +1) *3 );
                     construccion(posX, posY +2, ancho, largo,"rigth");
                     sos = false;
                 }else if(direccion == 2 && ny &&ny1&& tablaJuego[posX][posY -1] != 3 && tablaJuego[posX][posY -2] !=3 && direc != "right"){
 
                     //console.log("entra NY" + direccion);
-                    //caminoEncontrado = true;
                     tablaJuego[posX][posY] = 3;
                     tablaJuego[posX][posY-1] = 3;
-                    //suelo(posX*3,p,posY*3);
-                    //suelo(posX *3 ,p,(posY -1) *3 );
                     construccion(posX, (posY -2), ancho, largo,"left");
                     sos = false;
                 } else if(direccion == 3 && nx&& nx1 && tablaJuego[posX -1][posY] != 3 && tablaJuego[posX -2][posY] !=3 && direc != "up"){
                     //console.log("entra PX" + direccion);
-                    //caminoEncontrado = true;
                     tablaJuego[posX][posY] = 3;
                     tablaJuego[posX-1][posY] = 3;
-                    //suelo(posX *3,p,posY *3);
-                    //suelo((posX -1) *3 ,p,posY *3 );
                     construccion(posX - 2, posY, ancho, largo,"down");
                     sos = false;
                 } else {
@@ -209,6 +190,8 @@ function main() {
           }while(caminoEncontrado == true)
         }
       }
+
+
       rellenar();
       function rellenar (){
         //console.log("pintando");
@@ -219,9 +202,10 @@ function main() {
           }
         }
       }
+
+
       function shuffle(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;
-
         // While there remain elements to shuffle...
         while (0 !== currentIndex) {
 
@@ -236,7 +220,7 @@ function main() {
         }
 
         return array;
-      }
+      }}
     }
   }
 }
