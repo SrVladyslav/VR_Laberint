@@ -32,7 +32,8 @@ function main() {
      var nombre = prompt("Con que area del Laberinto quiere jugar usted?(para telefonos es recomendable una menor de 21):  ");
       if(nombre %2 ==0 && nombre > 6){alert("Introduzca una area impar por favor, gracias!!")}
       else if(nombre < 7){ alert("Por favor, algo mas de competitividad, intenta un laberinto mas grande !!:")}
-  }while(nombre % 2 == 0 || nombre < 6 || nombre > 300)
+      else if(nombre < 71){alert("Por amor a vuestro dispositivo y la fluides, os restringimos tal area. Por favor, intente una mas pequeña!");}
+  }while(nombre % 2 == 0 || nombre < 6 || nombre > 71)
   alert("Usted eligio " + nombre+ ". Que la suerte os acompañe!!!");
   lado = nombre;
   //if(!isFirefox){lado = 7;} //en caso que no sea firefox
