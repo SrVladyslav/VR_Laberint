@@ -4,7 +4,6 @@ function main() {
   var mapa = document.querySelector('a-scene');
   var p = -1.05; //coordenada y del muro
   var direc = "";//ireccion a la que ira el camino
-<<<<<<< HEAD
   var lado = 1;
   do{
      var nombre = prompt("Con que area del Laberinto quiere jugar usted?(para telefonos es recomendable una menor de 21):  ");
@@ -15,9 +14,8 @@ function main() {
   lado = nombre;
 
   if(lado == 1){window.location.reload(); }
-=======
-  var lado = 43;
->>>>>>> d73e124d4c3260985b443fdb82f58e20a63833f4
+
+  //var lado = 43;
   /*
     Este metodo añade un cubo al mapa para construir el laberinto
     @param: x,y: coordenadas respectivas
