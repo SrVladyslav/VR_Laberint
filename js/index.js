@@ -32,20 +32,16 @@ function main() {
      var nombre = prompt("Con que area del Laberinto quiere jugar usted?(para telefonos es recomendable una menor de 21):  ");
       if(nombre %2 ==0 && nombre > 6){alert("Introduzca una area impar por favor, gracias!!")}
       else if(nombre < 7){ alert("Por favor, algo mas de competitividad, intenta un laberinto mas grande !!:")}
-  }while(nombre % 2 == 0 || nombre < 6 || nombre > 300)
+      if(nombre > 71){alert("Por amor a vuestro dispositivo y la fluidez del juego, os restringimos la posibilidad de crear un laberinto tangrande. Por favor, inente con uno mas pequeño!!");}
+  }while(nombre % 2 == 0 || nombre < 6 || nombre > 71)
   alert("Usted eligio " + nombre+ ". Que la suerte os acompañe!!!");
   lado = nombre;
-  if(!isFirefox){lado = 7;}
   if(lado == 1){window.location.reload(); }
 
-  //var lado = 43;
   /*
     Este metodo añade un cubo al mapa para construir el laberinto
     @param: x,y: coordenadas respectivas
   */
-
-  /**location.reload();*/
-
   var user = document.getElementById('user');
   user.setAttribute('win-listener', {x: (lado-3)*3, z: (lado-3)*3});
   console.log((lado-2)*3);
@@ -126,27 +122,8 @@ function main() {
           tablaJuego[i][j] = 0; 
         }
       }
-      /*
-      for(var i = 0; i < ancho; i++){
-          for(var j = 0; j < largo; j++){
-                techo(i*3 - 1,p,j*3 - 1);
-          }
-      }*/
+
       var lin;
-/*
-      fetch('laberinto.txt')
-      .then(res => res.text())
-      .then(content => {
-      var lines = content.split(/\n/);
-      lines.forEach(line => console.log(Array.from(lines)));
-      //lines.forEach(line => lin = Array.from(lines));
-      //lines.forEach(line => console.log(line));
-      });*/
-
-      //console.log(lines);
-      //console.log(" + " + lin[1]);
-
-
 
 
       var caminoEncontrado = false;
