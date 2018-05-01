@@ -35,7 +35,7 @@ function main() {
        var nombre = prompt("Con que area del Laberinto quiere jugar usted?(para telefonos es recomendable una menor de 21):  ");
         if(nombre %2 ==0 && nombre > 6){alert("Introduzca una area impar por favor, gracias!!")}
         else if(nombre < 7){ alert("Por favor, algo mas de competitividad, intenta un laberinto mas grande !!:")}
-        if(nombre > 71){alert("Por amor a vuestro dispositivo y la fluidez del juego, os restringimos la posibilidad de crear un laberinto tangrande. Por favor, inente con uno mas pequeño!!");}
+        if(nombre > 71){alert("Por amor a vuestro dispositivo y la fluidez del juego, os restringimos la posibilidad de crear un laberinto tan grande. Por favor, intente con uno mas pequeño!!");}
     }while(nombre % 2 == 0 || nombre < 6 || nombre > 71)
   alert("Usted eligio " + nombre+ ". Que la suerte os acompañe!!!");
   lado = nombre;
