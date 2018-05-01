@@ -4,25 +4,25 @@ function main() {
   //detectamos el navegador
     // Opera 8.0+
   var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-
+  if(isOpera){alert("Estas usando Opera !!");}
   // Firefox 1.0+
   var isFirefox = typeof InstallTrigger !== 'undefined';
-
+  if(isFirefox){alert("Estas usando Firefox, es el mejor para este juego !!");}
   // Safari 3.0+ "[object HTMLElementConstructor]" 
   var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
-
+  if(isSafari){alert("Estas usando Safari, te gustan los iPhones!!");}
   // Internet Explorer 6-11
   var isIE = /*@cc_on!@*/false || !!document.documentMode;
-
+  if(isIE){alert("Estas usando IE !!");}
   // Edge 20+
   var isEdge = !isIE && !!window.StyleMedia;
-
+  if(isEdge){alert("Estas usando Edge!!");}
   // Chrome 1+
   var isChrome = !!window.chrome && !!window.chrome.webstore;
-
+  if(isChrome){alert("Estas usando Chrome, cuidado, google tendra toda tu informacion!!");}
   // Blink engine detection
   var isBlink = (isChrome || isOpera) && !!window.CSS;
-
+  if(isBlink){alert("Estas usando Blink !!");}
   //juego
   var mapa = document.querySelector('a-scene');
   var p = -1.05; //coordenada y del muro
@@ -35,7 +35,7 @@ function main() {
   }while(nombre % 2 == 0 || nombre < 6 || nombre > 300)
   alert("Usted eligio " + nombre+ ". Que la suerte os acompañe!!!");
   lado = nombre;
-  if(!isFirefox){lado = 7;}
+  //if(!isFirefox){lado = 7;} //en caso que no sea firefox
   if(lado == 1){window.location.reload(); }
 
   //var lado = 43;
