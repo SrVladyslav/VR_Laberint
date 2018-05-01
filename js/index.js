@@ -31,12 +31,12 @@ function main() {
   var p = -1.05; //coordenada y del muro
   var direc = "";//ireccion a la que ira el camino
   var lado = 1;
-    do{
-       var nombre = prompt("Con que area del Laberinto quiere jugar usted?(para telefonos es recomendable una menor de 21):  ");
-        if(nombre %2 ==0 && nombre > 6){alert("Introduzca una area impar por favor, gracias!!");}
-        else if(nombre < 7){ alert("Por favor, algo mas de competitividad, intenta un laberinto mas grande !!:");}
-        if(nombre > 71){alert("Por amor a vuestro dispositivo y la fluidez del juego, os restringimos la posibilidad de crear un laberinto tan grande. Por favor, intente con uno mas pequeño!!");}
-    }while(nombre % 2 == 0 || nombre < 6 || nombre > 71)
+  do{
+     var nombre = prompt("Con que area del Laberinto quiere jugar usted?(para telefonos es recomendable una menor de 21):  ");
+      if(nombre %2 ==0 && nombre > 6){alert("Introduzca una area impar por favor, gracias!!");}
+      else if(nombre < 7){ alert("Por favor, algo mas de competitividad, intenta un laberinto mas grande !!:");}
+      if(nombre > 71){alert("Por amor a vuestro dispositivo y la fluidez del juego, os restringimos la posibilidad de crear un laberinto tan grande. Por favor, intente con uno mas pequeño!!");}
+  }while(nombre % 2 == 0 || nombre < 6 || nombre > 71)
   alert("Usted eligio " + nombre+ ". Que la suerte os acompañe!!!");
   lado = nombre;
   //if(!isFirefox){lado = 7;} //en caso que no sea firefox
@@ -218,9 +218,8 @@ function main() {
           array[currentIndex] = array[randomIndex];
           array[randomIndex] = temporaryValue;
         }
-
         return array;
-      }}
+      }
     }
   }
 }
