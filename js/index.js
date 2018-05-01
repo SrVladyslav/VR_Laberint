@@ -36,10 +36,6 @@ function main() {
   }while(nombre % 2 == 0 || nombre < 6 || nombre > 71)
   alert("Usted eligio " + nombre+ ". Que la suerte os acompañe!!!");
   lado = nombre;
-      if(nombre > 71){alert("Por amor a vuestro dispositivo y la fluidez, os restringimos tal area. Por favor, intente una mas pequeña!");}
-  }while(nombre % 2 == 0 || nombre < 6 || nombre > 71)
-  alert("Usted eligio " + nombre+ ". Que la suerte os acompañe!!!");
-  lado = nombre;
   //if(!isFirefox){lado = 7;} //en caso que no sea firefox
   if(lado == 1){window.location.reload(); }
 
