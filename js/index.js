@@ -48,7 +48,6 @@ function main() {
   */
   var user = document.getElementById('user');
   user.setAttribute('win-listener', {x: (lado-3)*3, z: (lado-3)*3});
-  console.log((lado-2)*3);
 
   function pared(x,y,z){
     var muro = document.createElement('a-box');         //creo el cubo que sera nuestro muro
