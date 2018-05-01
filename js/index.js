@@ -2,9 +2,18 @@ window.onload = function () { main()}
 
 function main() {
   var mapa = document.querySelector('a-scene');
-  var p = -0.4; //coordenada y del muro
+  var p = -1.05; //coordenada y del muro
   var direc = "";//ireccion a la que ira el camino
-  var lado = 7;
+  var lado = 1;
+  do{
+     var nombre = prompt("Con que area del Laberinto quiere jugar usted?(para telefonos es recomendable una menor de 21):  ");
+      if(nombre %2 ==0 && nombre > 6){alert("Introduzca una area impar por favor, gracias!!")}
+      else if(nombre < 7){ alert("Por favor, algo mas de competitividad, intenta un laberinto mas grande !!:")}
+  }while(nombre % 2 == 0 || nombre < 6 || nombre > 300)
+  alert("Usted eligio " + nombre+ ". Que la suerte os acompañe!!!");
+  lado = nombre;
+
+  if(lado == 1){window.location.reload(); }
   /*
     Este metodo añade un cubo al mapa para construir el laberinto
     @param: x,y: coordenadas respectivas
@@ -118,6 +127,7 @@ function main() {
       var caminoEncontrado = false;
       construccion(0,0,lado,lado,"up");//inicio la funcio :)
       rellenar();
+      suelo((lado-3)*3,p,(lado-3)*3);
       /*metodo recursivo que buscara y creara el laberinto
        @param: posX,posY se encargan de la posicion actual del metodo
        y @param ancho, alto: se encargan de la posicion final del metodo recursivo*/
@@ -202,7 +212,7 @@ function main() {
         for(var i = 0; i < ancho-2; i++){
           for(var j = 0; j < largo-2; j++){
                 console.log(tablaJuego[i][j]);
-                if(tablaJuego[i][j] != 3 )pared(i*3,p,j*3);
+                if(tablaJuego[i][j] != 3 || !tablaJuego[lado-3][lado-3])pared(i*3,p,j*3);
           }
         }
       }
