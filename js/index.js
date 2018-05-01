@@ -187,7 +187,7 @@ function main() {
               while(possibilities.length > 0) {
                 direccion = possibilities.pop();
                 if(direccion == 0 && px&& px1 && tablaJuego[posX + 1][posY] != 3 && tablaJuego[posX +2][posY] !=3 && direc != "down"){
-                    console.log("entra PX" + direccion);
+                    //console.log("entra PX" + direccion);
                     //caminoEncontrado = true;
                     tablaJuego[posX][posY] = 3;
                     tablaJuego[posX+1][posY] = 3;
@@ -196,7 +196,7 @@ function main() {
                     construccion(posX + 2, posY, ancho, largo,"up");
                     sos = false;
                 }else if(direccion == 1 && py&&py1 && tablaJuego[posX][posY +1] != 3 && tablaJuego[posX][posY +2] !=3 && direc != "left"){
-                    console.log("entra PY" + direccion);
+                    //console.log("entra PY" + direccion);
                     //caminoEncontrado = true;
                     tablaJuego[posX][posY] = 3;
                     tablaJuego[posX][posY+1] = 3;
@@ -206,7 +206,7 @@ function main() {
                     sos = false;
                 }else if(direccion == 2 && ny &&ny1&& tablaJuego[posX][posY -1] != 3 && tablaJuego[posX][posY -2] !=3 && direc != "right"){
 
-                    console.log("entra NY" + direccion);
+                    //console.log("entra NY" + direccion);
                     //caminoEncontrado = true;
                     tablaJuego[posX][posY] = 3;
                     tablaJuego[posX][posY-1] = 3;
@@ -215,7 +215,7 @@ function main() {
                     construccion(posX, (posY -2), ancho, largo,"left");
                     sos = false;
                 } else if(direccion == 3 && nx&& nx1 && tablaJuego[posX -1][posY] != 3 && tablaJuego[posX -2][posY] !=3 && direc != "up"){
-                    console.log("entra PX" + direccion);
+                    //console.log("entra PX" + direccion);
                     //caminoEncontrado = true;
                     tablaJuego[posX][posY] = 3;
                     tablaJuego[posX-1][posY] = 3;
@@ -224,7 +224,7 @@ function main() {
                     construccion(posX - 2, posY, ancho, largo,"down");
                     sos = false;
                 } else {
-                  console.log('SOS');
+                  //console.log('SOS');
                 }
               }
             }
@@ -233,10 +233,10 @@ function main() {
       }
       rellenar();
       function rellenar (){
-        console.log("pintando");
+        //console.log("pintando");
         for(var i = 0; i < ancho-2; i++){
           for(var j = 0; j < largo-2; j++){
-                console.log(tablaJuego[i][j]);
+                //console.log(tablaJuego[i][j]);
                 if(tablaJuego[i][j] != 3 || !tablaJuego[lado-3][lado-3])pared(i*3,p,j*3);
           }
         }
