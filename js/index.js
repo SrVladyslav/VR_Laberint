@@ -122,13 +122,10 @@ function main() {
           tablaJuego[i][j] = 0; 
         }
       }
-
       var lin;
-
-
       var caminoEncontrado = false;
       construccion(0,0,lado,lado,"up");//inicio la funcio :)
-      rellenar();
+      //rellenar();
       suelo((lado-3)*3,p,(lado-3)*3);
       /*metodo recursivo que buscara y creara el laberinto
        @param: posX,posY se encargan de la posicion actual del metodo
@@ -151,71 +148,67 @@ function main() {
           var py1 = (posY+2 <= lado -2);//Y positiva 
           var ny1 = (posY-2 >= 0);
 
-          console.log( direccion);
+          //console.log( direccion);
           //direccion
-
-
-          var labBn = false;
+        	var sos = true;
           do{
-          	var sos = true;
-	          do{
+            if(posX== lado-2 && posY== lado-2){suelo(posX *3,p,posY *3);return;}
+            else {
+            	//console.log("posicion " + posX + "y " + posY);
+              var possibilities = shuffle([0,1,2,3]);
+              while(possibilities.length > 0) {
+                direccion = possibilities.pop();
+                if(direccion == 0 && px&& px1 && tablaJuego[posX + 1][posY] != 3 && tablaJuego[posX +2][posY] !=3 && direc != "down"){
+                    //console.log("entra PX" + direccion);
+                    tablaJuego[posX][posY] = 3;
+                    tablaJuego[posX+1][posY] = 3;
+                    construccion(posX + 2, posY, ancho, largo,"up");
+                    sos = false;
+                }else if(direccion == 1 && py&&py1 && tablaJuego[posX][posY +1] != 3 && tablaJuego[posX][posY +2] !=3 && direc != "left"){
+                    //console.log("entra PY" + direccion);
+                    tablaJuego[posX][posY] = 3;
+                    tablaJuego[posX][posY+1] = 3;
+                    construccion(posX, posY +2, ancho, largo,"rigth");
+                    sos = false;
+                }else if(direccion == 2 && ny &&ny1&& tablaJuego[posX][posY -1] != 3 && tablaJuego[posX][posY -2] !=3 && direc != "right"){
 
-	            if(posX== lado-2 && posY== lado-2){suelo(posX *3,p,posY *3);return;}
-	            else {
-	            	//console.log("posicion " + posX + "y " + posY);
-	              var possibilities = shuffle([0,1,2,3]);
-	              while(possibilities.length > 0) {
-	                direccion = possibilities.pop();
-	                if(direccion == 0 && px&& px1 && tablaJuego[posX + 1][posY] != 3 && tablaJuego[posX +2][posY] !=3 && direc != "down"){
-	                    //console.log("entra PX" + direccion);
-	                    tablaJuego[posX][posY] = 3;
-	                    tablaJuego[posX+1][posY] = 3;
-	                    construccion(posX + 2, posY, ancho, largo,"up");
-	                    sos = false;
-	                }else if(direccion == 1 && py&&py1 && tablaJuego[posX][posY +1] != 3 && tablaJuego[posX][posY +2] !=3 && direc != "left"){
-	                    //console.log("entra PY" + direccion);
-	                    tablaJuego[posX][posY] = 3;
-	                    tablaJuego[posX][posY+1] = 3;
-	                    construccion(posX, posY +2, ancho, largo,"rigth");
-	                    sos = false;
-	                }else if(direccion == 2 && ny &&ny1&& tablaJuego[posX][posY -1] != 3 && tablaJuego[posX][posY -2] !=3 && direc != "right"){
-
-	                    //console.log("entra NY" + direccion);
-	                    tablaJuego[posX][posY] = 3;
-	                    tablaJuego[posX][posY-1] = 3;
-	                    construccion(posX, (posY -2), ancho, largo,"left");
-	                    sos = false;
-	                } else if(direccion == 3 && nx&& nx1 && tablaJuego[posX -1][posY] != 3 && tablaJuego[posX -2][posY] !=3 && direc != "up"){
-	                    //console.log("entra PX" + direccion);
-	                    tablaJuego[posX][posY] = 3;
-	                    tablaJuego[posX-1][posY] = 3;
-	                    construccion(posX - 2, posY, ancho, largo,"down");
-	                    sos = false;
-	                } else {
-	                  //console.log('SOS');
-	                }
-	              }
-	            }
-	          }while(caminoEncontrado == true)
-	          if(tablaJuego[0][2] !=3 && tablaJuego[2][0] !=3 && tablaJuego[2][2] !=3){labBn = false; console.log("fuck")}else{labBn == true; console.log("x "+tablaJuego[0][1] + " y "+ tablaJuego[1][0]);}
-        	}while(labBn)
+                    //console.log("entra NY" + direccion);
+                    tablaJuego[posX][posY] = 3;
+                    tablaJuego[posX][posY-1] = 3;
+                    construccion(posX, (posY -2), ancho, largo,"left");
+                    sos = false;
+                } else if(direccion == 3 && nx&& nx1 && tablaJuego[posX -1][posY] != 3 && tablaJuego[posX -2][posY] !=3 && direc != "up"){
+                    //console.log("entra PX" + direccion);
+                    tablaJuego[posX][posY] = 3;
+                    tablaJuego[posX-1][posY] = 3;
+                    construccion(posX - 2, posY, ancho, largo,"down");
+                    sos = false;
+                } else {
+                  //console.log('SOS');
+                }
+              }
+            }
+          }while(caminoEncontrado == true)
         }
       }
-
-
+      //suelo(0*3,0,1*3);
+      //suelo(1*3,0.5,0*3);
       rellenar();
       function rellenar (){
         //console.log("pintando");
         for(var i = 0; i < ancho-2; i++){
           for(var j = 0; j < largo-2; j++){
                 //console.log(tablaJuego[i][j]);
-                if(tablaJuego[i][j] != 3 || !tablaJuego[lado-3][lado-3]){
+                if(tablaJuego[i][j] != 3 || !tablaJuego[lado-3][lado-3] || !tablaJuego[0][0]){
                 	//var aux = Math.random();
-                		//if(aux > 0.2){
-                			pared(i*3,p,j*3);//}
-                }
+                	//	if(aux > 0.2){
+                			pared(i*3,p,j*3);}
+                //}
           }
         }
+        if(tablaJuego[0][1] != 3 && tablaJuego[1][0] !=3 ){
+      		 	alert("Ocurrio un pequeño error al cargar el laberinto."); window.location.reload();
+      		}
       }
 
 
