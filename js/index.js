@@ -31,12 +31,20 @@ function main() {
   var p = -1.05; //coordenada y del muro
   var direc = "";//ireccion a la que ira el camino
   var lado = 1;
+  var ladoElejido = true;// comprobara si el lado es numerico
   do{
-     var nombre = prompt("Con que area del Laberinto quiere jugar usted?(para telefonos es recomendable una menor de 21):  ");
-      if(nombre %2 ==0 && nombre > 6){alert("Introduzca una area impar por favor, gracias!!");}
-      else if(nombre < 7){ alert("Por favor, algo mas de competitividad, intenta un laberinto mas grande !!:");}
-      if(nombre > 71){alert("Por amor a vuestro dispositivo y la fluidez del juego, os restringimos la posibilidad de crear un laberinto tan grande. Por favor, intente con uno mas pequeño!!");}
-  }while(nombre % 2 == 0 || nombre < 6 || nombre > 71)
+     	var nombre = prompt("Con que area del Laberinto quiere jugar usted?(para telefonos es recomendable una menor de 21):  ");
+      if(isNaN(nombre)){ 
+     		alert("Por favor, inserte un numero."); 
+     		ladoElejido = false;
+     	}else {
+     		ladoElejido = true;
+				if(nombre %2 ==0 && nombre > 6){alert("Introduzca una area impar por favor, gracias!!");}
+      	else if(nombre < 7){ alert("Por favor, algo mas de competitividad, intenta un laberinto mas grande !!:");}
+      	if(nombre > 71){alert("Por amor a vuestro dispositivo y la fluidez del juego, os restringimos la posibilidad de crear un laberinto tan grande. Por favor, intente con uno mas pequeño!!");}
+  		}
+  }while((nombre % 2 == 0 || nombre < 6 || nombre > 71) || !ladoElejido)
+
   alert("Usted eligio " + nombre+ ". Que la suerte os acompañe!!!");
   lado = nombre;
   //if(!isFirefox){lado = 7;} //en caso que no sea firefox
@@ -92,8 +100,7 @@ function main() {
       mapa.appendChild(tierra);                             //añado mi muro al mapa
   }
 
-
-  laberinto(lado,lado); 
+	laberinto(lado,lado);
   /**metodo para dibujar el laberinto*/
   function laberinto(ancho, largo){
     //dibujo las paredes exteriores que limitaran el campo
@@ -147,46 +154,51 @@ function main() {
           console.log( direccion);
           //direccion
 
-          var sos = true;
-          
+
+          var labBn = false;
           do{
-            if(posX== lado-2 && posY== lado-2){suelo(posX *3,p,posY *3);return;}
+          	var sos = true;
+	          do{
 
-            else {
-              var possibilities = shuffle([0,1,2,3]);
-              while(possibilities.length > 0) {
-                direccion = possibilities.pop();
-                if(direccion == 0 && px&& px1 && tablaJuego[posX + 1][posY] != 3 && tablaJuego[posX +2][posY] !=3 && direc != "down"){
-                    //console.log("entra PX" + direccion);
-                    tablaJuego[posX][posY] = 3;
-                    tablaJuego[posX+1][posY] = 3;
-                    construccion(posX + 2, posY, ancho, largo,"up");
-                    sos = false;
-                }else if(direccion == 1 && py&&py1 && tablaJuego[posX][posY +1] != 3 && tablaJuego[posX][posY +2] !=3 && direc != "left"){
-                    //console.log("entra PY" + direccion);
-                    tablaJuego[posX][posY] = 3;
-                    tablaJuego[posX][posY+1] = 3;
-                    construccion(posX, posY +2, ancho, largo,"rigth");
-                    sos = false;
-                }else if(direccion == 2 && ny &&ny1&& tablaJuego[posX][posY -1] != 3 && tablaJuego[posX][posY -2] !=3 && direc != "right"){
+	            if(posX== lado-2 && posY== lado-2){suelo(posX *3,p,posY *3);return;}
+	            else {
+	            	//console.log("posicion " + posX + "y " + posY);
+	              var possibilities = shuffle([0,1,2,3]);
+	              while(possibilities.length > 0) {
+	                direccion = possibilities.pop();
+	                if(direccion == 0 && px&& px1 && tablaJuego[posX + 1][posY] != 3 && tablaJuego[posX +2][posY] !=3 && direc != "down"){
+	                    //console.log("entra PX" + direccion);
+	                    tablaJuego[posX][posY] = 3;
+	                    tablaJuego[posX+1][posY] = 3;
+	                    construccion(posX + 2, posY, ancho, largo,"up");
+	                    sos = false;
+	                }else if(direccion == 1 && py&&py1 && tablaJuego[posX][posY +1] != 3 && tablaJuego[posX][posY +2] !=3 && direc != "left"){
+	                    //console.log("entra PY" + direccion);
+	                    tablaJuego[posX][posY] = 3;
+	                    tablaJuego[posX][posY+1] = 3;
+	                    construccion(posX, posY +2, ancho, largo,"rigth");
+	                    sos = false;
+	                }else if(direccion == 2 && ny &&ny1&& tablaJuego[posX][posY -1] != 3 && tablaJuego[posX][posY -2] !=3 && direc != "right"){
 
-                    //console.log("entra NY" + direccion);
-                    tablaJuego[posX][posY] = 3;
-                    tablaJuego[posX][posY-1] = 3;
-                    construccion(posX, (posY -2), ancho, largo,"left");
-                    sos = false;
-                } else if(direccion == 3 && nx&& nx1 && tablaJuego[posX -1][posY] != 3 && tablaJuego[posX -2][posY] !=3 && direc != "up"){
-                    //console.log("entra PX" + direccion);
-                    tablaJuego[posX][posY] = 3;
-                    tablaJuego[posX-1][posY] = 3;
-                    construccion(posX - 2, posY, ancho, largo,"down");
-                    sos = false;
-                } else {
-                  //console.log('SOS');
-                }
-              }
-            }
-          }while(caminoEncontrado == true)
+	                    //console.log("entra NY" + direccion);
+	                    tablaJuego[posX][posY] = 3;
+	                    tablaJuego[posX][posY-1] = 3;
+	                    construccion(posX, (posY -2), ancho, largo,"left");
+	                    sos = false;
+	                } else if(direccion == 3 && nx&& nx1 && tablaJuego[posX -1][posY] != 3 && tablaJuego[posX -2][posY] !=3 && direc != "up"){
+	                    //console.log("entra PX" + direccion);
+	                    tablaJuego[posX][posY] = 3;
+	                    tablaJuego[posX-1][posY] = 3;
+	                    construccion(posX - 2, posY, ancho, largo,"down");
+	                    sos = false;
+	                } else {
+	                  //console.log('SOS');
+	                }
+	              }
+	            }
+	          }while(caminoEncontrado == true)
+	          if(tablaJuego[0][2] !=3 && tablaJuego[2][0] !=3 && tablaJuego[2][2] !=3){labBn = false; console.log("fuck")}else{labBn == true; console.log("x "+tablaJuego[0][1] + " y "+ tablaJuego[1][0]);}
+        	}while(labBn)
         }
       }
 
@@ -197,7 +209,11 @@ function main() {
         for(var i = 0; i < ancho-2; i++){
           for(var j = 0; j < largo-2; j++){
                 //console.log(tablaJuego[i][j]);
-                if(tablaJuego[i][j] != 3 || !tablaJuego[lado-3][lado-3])pared(i*3,p,j*3);
+                if(tablaJuego[i][j] != 3 || !tablaJuego[lado-3][lado-3]){
+                	//var aux = Math.random();
+                		//if(aux > 0.2){
+                			pared(i*3,p,j*3);//}
+                }
           }
         }
       }
