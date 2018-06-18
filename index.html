@@ -1,38 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8"/>
-        <html>
-            <head>
-                <script src="https://aframe.io/releases/0.5.0/aframe.min.js">
-                </script>
-                <script src="https://cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.min.js"></script>
-                <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v3.1.1/dist/aframe-physics-system.min.js"></script>
-                <script src="./js/win-listener.js"></script>
-                
-            </head>
-            <body>
-                <a-scene id="scene" physics>
-                    <a-entity id="user" camera="userHeight: 2.1" position=" 0 0.5 0"
-                        kinematic-body universal-controls>
-                    </a-entity>
-                    <a-plane color="#666666" height="900" position="0 -0.6 -4" repeat="80 80" rotation="-90 0 0" src="assets/suelo.jpg" width="900" static-body>
-                    </a-plane>
-                    <a-sky color="#0099FF" src="assets/sky.jpg">
-                    </a-sky>
-                    <assets>
-                        <img id="ladrillos" src="assets/piedra.jpg">
-                        <img id="floor" src="assets/infusion.png">
-                        <img id="techo" src="assets/suelo2.png">
-                        <text id="xD" src="laberinto.txt">
-                    </assets>
-                    
-                    <script type="text/javascript">
-                    </script>
-                    <script src="js/index.js">
-                    </script>
-                </a-scene>
-            </body>
-        </html>
-    </head>
+<html>
+		<head>
+					<title>VR_Laberint</title>
+					<meta charset="utf-8"/>
+					<script src="./js/intro.js"></script>
+					<link rel="stylesheet" href="CSS/index.css">
+		</head>
+
+		<body background="assets/piedra.jpg">
+				<script>
+				function startGame() {
+				    document.location.replace("game.html");
+				}
+				</script>
+					<div>
+						 <h1 class="title">
+						 		WELCOME TO THE LABERINT!!
+						 </h1>
+					</div>
+					<div align="center">
+						 <button onclick="startGame()" class="button button1">
+						 			<h1>START GAME!!</h1>
+						 </button>
+					</div>
+		</body>
 </html>

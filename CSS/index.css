@@ -1,0 +1,60 @@
+.fila {
+  display: flex;
+  flex-direction: row;
+  height: 420px;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.anchoTop{
+	width: 400px;
+	height: 400px;
+}
+.anchoTop1{
+	width: 500px;
+	height: 400px;
+}
+
+.boton{
+  height: 500;
+  width: 200;
+}
+.justificado {
+  align-content: justify;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  height: 200px;
+  width: 100%;
+  margin-top: 50px;
+  justify-content: space-around;
+  font-size: 100px;
+  font-family: impact;
+  color: yellow;
+}
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    border-radius: 25%;
+    color: white;
+    padding: 50px 100px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    font-size: 30px;
+}
+
+.button1 {
+    background-color: #4CAF50; 
+    color: black; 
+    border: 2px solid #196319;
+}
+
+.button1:hover {
+    background-color: ;
+    color: white;
+}

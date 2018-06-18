@@ -24,8 +24,6 @@ function main() {
   var isBlink = (isChrome || isOpera) && !!window.CSS;
   if(isBlink){alert("Estas usando Blink !!");}
 
-
-
   //juego
   var mapa = document.querySelector('a-scene');
   var p = -1.05; //coordenada y del muro
