@@ -29,11 +29,17 @@
   height: 200px;
   width: 100%;
   margin-top: 50px;
+  margin-bottom: 50px; 
   justify-content: space-around;
   font-size: 100px;
   font-family: impact;
   color: yellow;
 }
+
+.title:hover {
+  color: #00ff00;
+}
+
 .button {
     background-color: #4CAF50; /* Green */
     border: none;
@@ -57,4 +63,48 @@
 .button1:hover {
     background-color: ;
     color: white;
+    padding: 60px 110px;
 }
+
+.insta{
+  height: 15px;
+  width: 15px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    margin-left: 0px;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+ul {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 20px 25px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #111;
+}
+.espaciado {
+  border-right: 1px solid #bbb;
+}
+.active {
+    background-color: #4CAF50;
+}
+
