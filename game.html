@@ -13,9 +13,10 @@
             </head>
             <body>
                 <a-scene id="scene" physics>
-                    <a-entity id="user" camera="userHeight: 2.1" position=" 0 0.5 0"
+                    <a-entity id="user" camera="userHeight: 2.1 zoom: true" position=" 0 0.5 0"
                         kinematic-body universal-controls>
                     </a-entity>
+
                     <a-plane color="#666666" height="900" position="0 -0.6 -4" repeat="80 80" rotation="-90 0 0" src="assets/suelo.jpg" width="900" static-body>
                     </a-plane>
                     <a-sky color="#0099FF" src="assets/sky.jpg">
@@ -25,8 +26,17 @@
                         <img id="floor" src="assets/infusion.png">
                         <img id="techo" src="assets/suelo2.png">
                         <text id="xD" src="laberinto.txt">
+                        <a-asset-item id="brainstem" src="https://cdn.aframe.io/test-models/models/brainstem/BrainStem.gltf"></a-asset-item>
+
+                         <a-asset-item id="bw" src="assets/obj/bw/scene.gltf"></a-asset-item>
+
+                        <a-asset-item id="tobj" src="assets/obj/suelo/untitled.obj"></a-asset-item>
+                        <a-asset-item id="tmtl" src="assets/obj/suelo/untitled.mtl"></a-asset-item>
                     </assets>
-                    
+
+
+                        <a-entity gltf-model="#brainstem" position="0 0 -5" scale="3 3 3"></a-entity>
+                        <a-entity id="cob" obj-model="obj: #tobj; mtl: #tmtl" ></a-entity>
                     <script type="text/javascript">
                     </script>
                     <script src="js/index.js">

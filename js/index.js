@@ -26,7 +26,7 @@ function main() {
 
   //juego
   var mapa = document.querySelector('a-scene');
-  var p = -1.05; //coordenada y del muro
+  /*var p = -1.05; //coordenada y del muro
   var direc = "";//ireccion a la que ira el camino
   var lado = 1;
   var ladoElejido = true;// comprobara si el lado es numerico
@@ -46,15 +46,15 @@ function main() {
   alert("Usted eligio " + nombre+ ". Que la suerte os acompañe!!!");
   lado = nombre;
   //if(!isFirefox){lado = 7;} //en caso que no sea firefox
-  if(lado == 1){window.location.reload(); }
+  //if(lado == 1){window.location.reload(); }*/
 
   /*
     Este metodo añade un cubo al mapa para construir el laberinto
     @param: x,y: coordenadas respectivas
   */
-  var user = document.getElementById('user');
+ /* var user = document.getElementById('user');
   user.setAttribute('win-listener', {x: (lado-3)*3, z: (lado-3)*3});
-
+*/
   function pared(x,y,z){
     var muro = document.createElement('a-box');         //creo el cubo que sera nuestro muro
     muro.setAttribute('geometry', {
@@ -69,6 +69,18 @@ function main() {
     mapa.appendChild(muro);                             //añado mi muro al mapa
   }
 
+  cobblestone(0,-1.25,0);
+
+  cobblestone(0,0,5);
+
+  function cobblestone(x,y,z){
+      var cobble = document.createElement('a-entity');
+      cobble.setAttribute("id","cob");
+      cobble.setAttribute('position', {x: z, y: y , z: z});
+      cobble.setAttribute('material',{src:"#tobj" , mtl:"#tmtl"});
+      mapa.appendChild(cobble);
+  }
+
   function suelo(x,y,z){
       var tierra = document.createElement('a-box');         //creo el cubo que sera nuestro muro
       tierra.setAttribute('geometry', {
@@ -78,12 +90,12 @@ function main() {
       });
       tierra.setAttribute('position', {x: x,y: y,z: z});    //declaramos la posicion
       tierra.setAttribute('shadow','cast','true');          //declaramos la sombra
-      tierra.setAttribute('material',{src:"#floor"});
+      //tierra.setAttribute('material',{src:"#floor"});
       tierra.setAttribute('static-body','');
       mapa.appendChild(tierra);                             //añado mi muro al mapa
   }
 
-  techo(3.5,lado);//llamo a la funcion
+  //techo(3.5,lado);//llamo a la funcion
   function techo(y,lado){
       var tierra = document.createElement('a-box');         //creo el cubo que sera nuestro muro
       tierra.setAttribute('geometry', {
@@ -98,7 +110,7 @@ function main() {
       mapa.appendChild(tierra);                             //añado mi muro al mapa
   }
 
-	laberinto(lado,lado);
+	//laberinto(lado,lado);
   /**metodo para dibujar el laberinto*/
   function laberinto(ancho, largo){
     //dibujo las paredes exteriores que limitaran el campo
@@ -189,8 +201,6 @@ function main() {
           }while(caminoEncontrado == true)
         }
       }
-      //suelo(0*3,0,1*3);
-      //suelo(1*3,0.5,0*3);
       rellenar();
       function rellenar (){
         //console.log("pintando");
