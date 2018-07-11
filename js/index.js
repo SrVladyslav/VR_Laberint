@@ -88,7 +88,7 @@ function main() {
       });
       tierra.setAttribute('position', {x: x,y: y,z: z});    //declaramos la posicion
       tierra.setAttribute('shadow','cast','true');          //declaramos la sombra
-      //tierra.setAttribute('material',{src:"#floor"});
+      tierra.setAttribute('material',{src:"#floor"});
       tierra.setAttribute('static-body','');
       mapa.appendChild(tierra);                             //añado mi muro al mapa
   }
